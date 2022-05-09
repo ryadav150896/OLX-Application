@@ -8,8 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zensar.olxapplication.dto.UserInformationDto;
+import com.zensar.olxapplication.entity.Token;
 import com.zensar.olxapplication.entity.UserInformation;
 import com.zensar.olxapplication.repository.UserInformationRepository;
+
+
+
+
 
 @Service
 public class UserInformationServiceImpl implements UserInformationService {
@@ -19,19 +24,21 @@ public class UserInformationServiceImpl implements UserInformationService {
 	@Autowired
 	private ModelMapper modelMapper;
 	
+	@Autowired
+	private Token token;
+	
 	//static List<UserInformation> userInformationList = new ArrayList<UserInformation>();
 
-
-	public  String loginUser(UserInformation userLogin, String token) {
+		//Token token =new Token();
+	public  Token loginUser(UserInformation userLogin) {
 		if (userLogin.getUserName().equals("anand") && userLogin.getPassword().equals("anand123")) {
-			
-			return "login Successfull!!";
+			token.setKey("auth-token");
+		    token.setValue("ry66540");
+		    
+		return token;
+		}else {
+		return null;
 		}
-		else {
-		
-		return "Authentication Failed!!";
-
-	}
 	}
 	public List<UserInformationDto> getUserInformation(String token) {
 		List<UserInformation> userInformation=userInformationRepository.findAll();
@@ -63,7 +70,7 @@ public class UserInformationServiceImpl implements UserInformationService {
 	
 	public boolean logoutUser(String token) {
 		if(token.equals("ry66540")) {
-		userInformationRepository.deleteAll();;
+		userInformationRepository.deleteAll();
 		return true;
 	}else {
 		return false;

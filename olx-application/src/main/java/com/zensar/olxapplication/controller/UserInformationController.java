@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zensar.olxapplication.dto.UserInformationDto;
+import com.zensar.olxapplication.entity.Token;
 import com.zensar.olxapplication.entity.UserInformation;
 import com.zensar.olxapplication.service.UserInformationService;
+
+
 
 @RestController
 public class UserInformationController {
@@ -29,18 +32,24 @@ public class UserInformationController {
 	@PostMapping(value = "/user/authenticate", consumes =  {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_VALUE}
 			, produces = { MediaType.APPLICATION_XML_VALUE,
 					MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<String> loginUser(@RequestBody UserInformation userLogin, String token) {
-
-		 String loginResult=userInformationService.loginUser(userLogin, token);
-		if(loginResult.equals("login Successfull!!")) {
-			token="ry66540";
-			return new ResponseEntity<String>(loginResult +" "+ token, HttpStatus.OK);
-		}else {
-			return new ResponseEntity<String>(loginResult, HttpStatus.BAD_REQUEST);
-		
+	public ResponseEntity<Token> loginUser(@RequestBody UserInformation userLogin) {
+			
+		 Token loginResult=userInformationService.loginUser(userLogin);
+		 if(loginResult==null) {
+		 return new ResponseEntity<Token>(HttpStatus.BAD_REQUEST);
+		 
+		 }
+		//if(loginResult.equals("login Successfull!!")) {
+		//	token="ry66540";
+			//return new ResponseEntity<Token>(loginRe +" "+ token, HttpStatus.OK);
+		//}else {
+			//return new ResponseEntity<Token>(loginResult, HttpStatus.BAD_REQUEST);
+		 else {
+			 return new ResponseEntity<Token>(loginResult,HttpStatus.ACCEPTED);
+		 }
 		
 	}
-}
+
 
 	// Get the user
 	// http:localhost:5050/user
