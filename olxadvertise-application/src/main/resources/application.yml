@@ -26,5 +26,5 @@ management:
        
   endpoint:
        shutdown: 
-          enabled: true
+          enabled: false
             

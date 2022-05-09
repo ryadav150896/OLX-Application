@@ -13,7 +13,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
 	
-	@ExceptionHandler(InvalidAdvertiseException.class)
+	@ExceptionHandler(InvalidAdvertiseIdException.class)
 	public ResponseEntity<CustomErrorResponse> handleStockError(HttpServletResponse response){
 		
 		

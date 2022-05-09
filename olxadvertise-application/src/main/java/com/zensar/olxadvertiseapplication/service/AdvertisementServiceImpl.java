@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.zensar.olxadvertiseapplication.dto.AdvertisementDto;
 import com.zensar.olxadvertiseapplication.entity.Advertisement;
-import com.zensar.olxadvertiseapplication.exception.InvalidAdvertiseException;
+import com.zensar.olxadvertiseapplication.exception.InvalidAdvertiseIdException;
 import com.zensar.olxadvertiseapplication.repository.AdvertisementRepository;
 
 
@@ -52,7 +52,7 @@ public class AdvertisementServiceImpl implements AdvertisementService {
 		}
 	}
 
-	public AdvertisementDto getAdvertise(long id) throws InvalidAdvertiseException {
+	public AdvertisementDto getAdvertise(long id) throws InvalidAdvertiseIdException {
 		//Optional<Stock> optStock = stockRepository.findById(stockId);
 		Optional<Advertisement> optAdvertise=advertisementRepository.findById(id);
 		
@@ -60,7 +60,7 @@ public class AdvertisementServiceImpl implements AdvertisementService {
 			Advertisement advertise=optAdvertise.get();
 			 return modelMapper.map(advertise,AdvertisementDto.class);
 		}else {
-			throw new InvalidAdvertiseException("Advertisement is not present of given id "+id);
+			throw new InvalidAdvertiseIdException("Advertisement is not present of given id "+id);
 		}
 	}
 	/*	Optional<Advertisement> advertise1 = ListOfAdvertisement.stream().filter(advertise -> advertise.getId() == id)
@@ -75,7 +75,7 @@ public class AdvertisementServiceImpl implements AdvertisementService {
 		});
 	}*/
 
-	public AdvertisementDto updateAdvertisement(int id, Advertisement advertise, String token) throws InvalidAdvertiseException {
+	public AdvertisementDto updateAdvertisement(long id, Advertisement advertise, String token) throws InvalidAdvertiseIdException {
 		AdvertisementDto advertiseDto = getAdvertise(id);
 		
 		Advertisement advertise2=modelMapper.map(advertiseDto, Advertisement.class);

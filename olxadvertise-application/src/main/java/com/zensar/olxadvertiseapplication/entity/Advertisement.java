@@ -19,7 +19,7 @@ public class Advertisement {
 	//@ApiModelProperty("id of Integer type")
 	@Id //to make id as primary
 	@GeneratedValue(strategy = GenerationType.AUTO)// for auto generation of id
-	private int id;
+	private long id;
 	
 	//@ApiModelProperty("title of String Type type")
 	private String title;

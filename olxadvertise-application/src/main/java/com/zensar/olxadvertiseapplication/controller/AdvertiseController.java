@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.zensar.olxadvertiseapplication.dto.AdvertisementDto;
 import com.zensar.olxadvertiseapplication.entity.Advertisement;
-import com.zensar.olxadvertiseapplication.exception.InvalidAdvertiseException;
+import com.zensar.olxadvertiseapplication.exception.InvalidAdvertiseIdException;
 import com.zensar.olxadvertiseapplication.service.AdvertisementService;
 
 @RestController
@@ -49,7 +49,7 @@ public class AdvertiseController {
 	@GetMapping(value = "/user/advertise/{id}", produces = { MediaType.APPLICATION_XML_VALUE,
 			MediaType.APPLICATION_JSON_VALUE })
 	//@ApiOperation("Get specific Advertise")
-	public AdvertisementDto getAdvertise(@PathVariable long id) throws InvalidAdvertiseException {
+	public AdvertisementDto getAdvertise(@PathVariable long id) throws InvalidAdvertiseIdException {
 
 		return advertisementService.getAdvertise(id);
 	}
@@ -60,8 +60,8 @@ public class AdvertiseController {
 			MediaType.APPLICATION_JSON_VALUE }, consumes = { MediaType.APPLICATION_XML_VALUE,
 					MediaType.APPLICATION_JSON_VALUE })
 	//@ApiOperation("Update Available Advertisement")
-	public AdvertisementDto updateAdvertisement(@PathVariable int id, @RequestBody Advertisement advertise,
-			@RequestHeader("auth-token") String token) throws InvalidAdvertiseException {
+	public AdvertisementDto updateAdvertisement(@PathVariable long id, @RequestBody Advertisement advertise,
+			@RequestHeader("auth-token") String token) throws InvalidAdvertiseIdException {
 		return advertisementService.updateAdvertisement(id, advertise, token);
 	}
 

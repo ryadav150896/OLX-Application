@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value=HttpStatus.BAD_REQUEST)
-public class InvalidAdvertiseException extends Exception {
+public class InvalidAdvertiseIdException extends Exception {
 	
 	
 	private String message;
@@ -17,7 +17,7 @@ public class InvalidAdvertiseException extends Exception {
 		this.message = message;
 	}
 
-	public InvalidAdvertiseException(String message) {
+	public InvalidAdvertiseIdException(String message) {
 		super(message);
 		//this.message = message;
 

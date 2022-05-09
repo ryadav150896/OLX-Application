@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class AdvertisementDto {
 	
 	
-	private int id;
+	private long id;
 	private String title;
 	private long price;
 	private String description;
